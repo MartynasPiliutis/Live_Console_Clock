@@ -11,6 +11,7 @@ namespace theClock
     {
         static void Main(string[] args)
         {
+            //Screen setup
             Console.SetWindowSize(150, 70);
             Console.CursorSize = 14;
             Console.SetBufferSize(200, 100);
@@ -26,11 +27,11 @@ namespace theClock
 
         }
 
-        public static void ShowTime(int h, int m, int s)
+        public static void ShowTime(int h, int m, int s) //Shows live digital time in the middle of the analg clock
         {
             Console.SetCursorPosition(67, 18); Console.Write($"{h.ToString("D2")}:{m.ToString("D2")}:{s.ToString("D2")}"); //time
         }
-        public static void CurrentTime()
+        public static void CurrentTime() //Draws the hands on the clock and digital clock
         {
             int h = DateTime.Now.Hour;
             int min = DateTime.Now.Minute;
@@ -39,14 +40,15 @@ namespace theClock
             DrawMinutesArrow(min, 2);
             DrawHourArrow(h, min, 3);
             DrawSecondArrow(s, 1);
-            Thread.Sleep(950);
+            Thread.Sleep(950); // 1 sec pause befor clearing the hands
             DrawSecondArrow(s, 0);
             DrawMinutesArrow(min, 0);
             DrawHourArrow(h, min, 0);
         }
 
-        public static void DrawClock()
+        public static void DrawClock() //Draws the analog clock without hands
         {
+            //DrawSeconds();
             Console.SetCursorPosition(71, 33); Console.Write("O"); //middle
             Console.SetCursorPosition(70, 2); Console.Write("|||"); //top 0 upper
             Console.SetCursorPosition(70, 3); Console.Write("|||"); //top 0 lower
@@ -54,7 +56,6 @@ namespace theClock
             Console.SetCursorPosition(71, 63); Console.Write("|"); //bottom 30 upper
             Console.SetCursorPosition(71, 64); Console.Write("|"); //bottom 30 lower
             Console.SetCursorPosition(10, 33); Console.Write("=="); //left 45
-
             Console.SetCursorPosition(101, 7); Console.Write("*");//5
             Console.SetCursorPosition(123, 18); Console.Write("*");//10
             Console.SetCursorPosition(123, 48); Console.Write("*");//20
@@ -65,27 +66,19 @@ namespace theClock
             Console.SetCursorPosition(41, 7); Console.Write("*");   //55
         }
 
-        public static void DrawSeconds()
+        public static void DrawSeconds() //Draws seconds points arround the watch, but not used (Not very nice to watch. Uncomment line 51 to see)
         {
-            int mastx;
-            int masty;
-            int r;
-            Console.Write("mastx: ");
-            mastx = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine();
-            Console.Write("masty: ");
-            masty = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine();
-            Console.Write("r: ");
-            r = Convert.ToInt32(Console.ReadLine());
-            Console.Clear();
+            int mastx = 6;
+            int masty = 3;
+            int r = 10;
+
             for (int i = 0; i < 60; i++)
             {
                 CalculatePoint(i, mastx, masty, r, 1);
             }
         }
 
-        public static void DrawMinutesArrow(int min, int wc)
+        public static void DrawMinutesArrow(int min, int wc) //Draws minutes' arrow
 
         {
             int mastx = 2;
@@ -96,7 +89,7 @@ namespace theClock
             }
         }
 
-        public static void DrawHourArrow(int hour, int min, int wc)
+        public static void DrawHourArrow(int hour, int min, int wc) //Draws hours' arrow
 
         {
             int mastx = 2;
